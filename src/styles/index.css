@@ -1,10 +1,22 @@
-.la-wrap{
+.la-wrap {
     width: 1520px; 
     margin: 100px auto;
 }
-.main-header{
+.main-header {
     display: flex;
     justify-content: space-between;
+}
+.tit .tit-logo {
+    width:250px;
+}
+.link-home {
+    padding: 15px 30px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #711bff;
 }
 .main-carousel{
     display: flex;
