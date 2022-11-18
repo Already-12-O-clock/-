@@ -1,17 +1,17 @@
 .la-wrap {
     width: 1520px; 
-    margin: 100px auto;
+    margin: 50px auto;
 }
 .main-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
 }
 .tit .tit-logo {
     width:250px;
 }
 .link-home {
-    padding: 15px 30px;
+    padding: 17px 30px 13px;
     text-align: center;
     border-radius: 10px;
     font-size: 18px;
