@@ -1,0 +1,11 @@
+.la-wrap{
+    width: 1520px; 
+    margin: 100px auto;
+}
+.main-header{
+    display: flex;
+    justify-content: space-between;
+}
+.main-carousel{
+    display: flex;
+}
