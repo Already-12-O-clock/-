@@ -1,9 +1,8 @@
 name: PR Checklist
 
 on:
-  issue_comment:
-    types:
-      - created
+  pull_request_review:
+    types: [submitted, edited, dismissed]
 
 jobs:
   pr_checklist:
