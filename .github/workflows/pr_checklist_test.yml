@@ -4,6 +4,8 @@ on:
     types:
       - opened
       - synchronize
+      - ready_for_review
+      - review_requested
 
 jobs:
   checklist:
