@@ -11,8 +11,9 @@ jobs:
     steps:
     - name: Add comment on review submission
       if: github.event.action == 'submitted' || github.event.review.state == 'commented'
-      uses: actions/github-script@v5
+      uses: actions/github-script@v6
       with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           const checklist = [
             // Define your checklist items here
@@ -36,6 +37,3 @@ jobs:
               body,
             });
           }
-
-      env: 
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
