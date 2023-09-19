@@ -77,3 +77,5 @@ jobs:
             issue_number: pr.data.number,
             body,
           });
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
