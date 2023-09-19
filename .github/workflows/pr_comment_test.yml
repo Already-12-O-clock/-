@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check if PR checklist is completed
+    - name: Add comment on review submission
+      if: github.event.action == 'submitted' || github.event.review.state == 'commented'
       uses: actions/github-script@v5
       with:
         script: |
@@ -19,50 +20,6 @@ jobs:
             "Item 2: Tests pass successfully",
             // Add more items as needed
           ];
-
-          const pr = await github.pulls.get({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            pull_number: context.payload.pull_request.number,
-          });
-
-          const comments = await github.issues.listComments({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            issue_number: pr.data.number,
-          });
-
-          const checklistCompleted = checklist.every(item => {
-            return comments.data.some(comment => comment.body.includes(item));
-          });
-
-          if (!checklistCompleted) {
-            const body = `:x: The checklist is incomplete. Please make sure to complete all checklist items.`;
-            github.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: pr.data.number,
-              body,
-            });
-            core.setFailed("Checklist is incomplete");
-          } else {
-            console.log("Checklist is complete");
-
-            // Merge the pull request
-            await github.pulls.merge({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: pr.data.number,
-            });
-
-            console.log("Pull request merged successfully");
-          }
-
-    - name: Add comment on review submission
-      if: github.event.action == 'submitted' && github.event.review.state == 'commented'
-      uses: actions/github-script@v5
-      with:
-        script: |
           const pr = await github.pulls.get({
             owner: context.repo.owner,
             repo: context.repo.repo,
