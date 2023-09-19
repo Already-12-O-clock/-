@@ -57,5 +57,26 @@ jobs:
 
             console.log("Pull request merged successfully");
           }
+
+    - name: Add comment on review submission
+      if: github.event.action == 'submitted' && github.event.review.state == 'commented'
+      uses: actions/github-script@v5
+      with:
+        script: |
+          const pr = await github.pulls.get({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.payload.pull_request.number,
+          });
+
+          const body = `Thank you for your review, @${context.payload.review.user.login}!`;
+
+          github.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: pr.data.number,
+            body,
+          });
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
